@@ -21,3 +21,10 @@ package-lock.json
 
 # vscode
 .vscode
+
+# Temp files
+tmp
+temp
+
+# ENV file
+.env
