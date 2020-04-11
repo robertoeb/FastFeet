@@ -1,10 +1,10 @@
 export default {
-  host: 'smtp.mailspons.com',
-  port: 2525,
+  host: process.env.MAIL_HOST,
+  port: process.env.MAIL_PORT,
   secure: false,
   auth: {
-    user: 'fastfeet',
-    pass: '25f10c0aacd743b9939608d7f879de10',
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
   },
   default: {
     from: 'FastFeet <noreply@fastfeet.com>',
