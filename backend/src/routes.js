@@ -8,16 +8,28 @@ import RecipientController from './app/controllers/RecipientController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import FileController from './app/controllers/FileController';
 import DeliveryController from './app/controllers/DeliveryController';
+import JobController from './app/controllers/JobController';
+import PasswordController from './app/controllers/PasswordController';
 
-import authMiddleware from './app/middlewares/auth';
+import adminAuthMiddleware from './app/middlewares/authAdmin';
+import deliverymanAuthMiddleware from './app/middlewares/authDeliveryman';
+import passwordAuthMiddleware from './app/middlewares/authPassword';
 
 const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
+routes.post('/forgotpassword', PasswordController.store);
 
-routes.use(authMiddleware);
+routes.put('/newpassword', passwordAuthMiddleware, PasswordController.update);
+
+routes.use(deliverymanAuthMiddleware);
+
+routes.get('/deliveryman/jobs', JobController.index);
+routes.put('/deliveryman/jobs/:deliveryId', JobController.update);
+
+routes.use(adminAuthMiddleware);
 
 routes.put('/users', UserController.update);
 

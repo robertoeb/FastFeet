@@ -13,7 +13,15 @@ class DeliveryController {
     const { page = 1 } = req.query;
 
     const deliveries = await Delivery.findAll({
-      attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
+      attributes: [
+        'id',
+        'product',
+        'canceled_at',
+        'start_date',
+        'end_date',
+        'delivered',
+        'canceled',
+      ],
       include: [
         {
           model: Recipient,
@@ -155,7 +163,15 @@ class DeliveryController {
     }
 
     const delivery = await Delivery.findByPk(deliveryId, {
-      attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
+      attributes: [
+        'id',
+        'product',
+        'canceled_at',
+        'start_date',
+        'end_date',
+        'delivered',
+        'canceled',
+      ],
       include: [
         {
           model: Recipient,
@@ -185,7 +201,15 @@ class DeliveryController {
     const { deliveryId } = req.params;
 
     const delivery = await Delivery.findByPk(deliveryId, {
-      attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
+      attributes: [
+        'id',
+        'product',
+        'canceled_at',
+        'start_date',
+        'end_date',
+        'delivered',
+        'canceled',
+      ],
       include: [
         {
           model: Recipient,
