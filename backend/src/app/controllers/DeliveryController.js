@@ -64,9 +64,7 @@ class DeliveryController {
     /**
      * Check if recipient exists
      */
-    const recipient = await Recipient.findOne({
-      where: { id: recipient_id },
-    });
+    const recipient = await Recipient.findByPk(recipient_id);
 
     if (!recipient) {
       return res.status(400).json({ error: 'Recipient does not exist.' });
@@ -75,9 +73,7 @@ class DeliveryController {
     /**
      * Check if deliveryman exists
      */
-    const deliveryman = await Deliveryman.findOne({
-      where: { id: deliveryman_id },
-    });
+    const deliveryman = await Deliveryman.findByPk(deliveryman_id);
 
     if (!deliveryman) {
       return res.status(400).json({ error: 'Deliveryman does not exist.' });
@@ -111,9 +107,7 @@ class DeliveryController {
      * Check if recipient exists
      */
     const recipient = recipient_id
-      ? await Recipient.findOne({
-          where: { id: recipient_id },
-        })
+      ? await Recipient.findByPk(recipient_id)
       : true;
 
     if (!recipient) {
@@ -124,9 +118,7 @@ class DeliveryController {
      * Check if deliveryman exists
      */
     const deliveryman = deliveryman_id
-      ? await Deliveryman.findOne({
-          where: { id: deliveryman_id },
-        })
+      ? await Deliveryman.findByPk(deliveryman_id)
       : true;
 
     if (!deliveryman) {
@@ -136,11 +128,7 @@ class DeliveryController {
     /**
      * Check if signature exists
      */
-    const signature = signature_id
-      ? await File.findOne({
-          where: { id: signature_id },
-        })
-      : true;
+    const signature = signature_id ? await File.findByPk(signature_id) : true;
 
     if (!signature) {
       return res.status(400).json({ error: 'Signature does not exist.' });

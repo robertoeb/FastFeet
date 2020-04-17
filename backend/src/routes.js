@@ -10,6 +10,7 @@ import FileController from './app/controllers/FileController';
 import DeliveryController from './app/controllers/DeliveryController';
 import JobController from './app/controllers/JobController';
 import PasswordController from './app/controllers/PasswordController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 import adminAuthMiddleware from './app/middlewares/authAdmin';
 import deliverymanAuthMiddleware from './app/middlewares/authDeliveryman';
@@ -29,6 +30,13 @@ routes.use(deliverymanAuthMiddleware);
 routes.get('/deliveryman/jobs', JobController.index);
 routes.put('/deliveryman/jobs/:deliveryId', JobController.update);
 
+routes.get('/deliveries/problems', DeliveryProblemController.index);
+routes.get('/deliveries/:deliveryId/problems', DeliveryProblemController.show);
+routes.post(
+  '/deliveries/:deliveryId/problems',
+  DeliveryProblemController.store
+);
+
 routes.use(adminAuthMiddleware);
 
 routes.put('/users', UserController.update);
@@ -45,6 +53,11 @@ routes.get('/deliveries', DeliveryController.index);
 routes.post('/deliveries', DeliveryController.store);
 routes.put('/deliveries/:deliveryId', DeliveryController.update);
 routes.delete('/deliveries/:deliveryId', DeliveryController.delete);
+
+routes.delete(
+  '/deliveries/:deliveryId/problems',
+  DeliveryProblemController.delete
+);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
